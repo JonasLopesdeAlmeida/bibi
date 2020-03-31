@@ -1,11 +1,14 @@
 package com.wyden.bibi.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Categoria  implements Serializable  {
@@ -15,6 +18,10 @@ public class Categoria  implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id_categoria;
 	private String nome_categoria;
+	
+	//uma categoria possui uma lista de livros
+	@ManyToMany(mappedBy = "categorias")
+	private List<Livro> livros = new ArrayList<>();
 	
 	
 	public Categoria() {
@@ -42,6 +49,17 @@ public class Categoria  implements Serializable  {
 
 	public void setNome_categoria(String nome_categoria) {
 		this.nome_categoria = nome_categoria;
+	}
+
+	
+	
+	
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
 	}
 
 	@Override
