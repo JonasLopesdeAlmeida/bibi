@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.wyden.bibi.model.Categoria;
 import com.wyden.bibi.repositories.CategoriaRepository;
+import com.wyden.bibi.services.exceptions.ObjectNotFoundException;
+
 
 @Service
 public class CategoriaService {
@@ -15,6 +17,8 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		"Categoria não encontrada! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 		}
+	
 }

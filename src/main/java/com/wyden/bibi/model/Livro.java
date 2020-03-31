@@ -1,5 +1,6 @@
 package com.wyden.bibi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.databind.ser.std.SerializableSerializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Livro extends SerializableSerializer {
-
+public class Livro implements Serializable  {
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id_livro;
@@ -25,6 +24,7 @@ public class Livro extends SerializableSerializer {
 	private Integer quantidade;
 	private String titulo, autor, editora, isbn;
     
+	
 	//livros tb possi uma lista de categorias.
 	@ManyToMany
 	//cria uma tabela secular quando se tem associacao muitos para muitos.
@@ -32,6 +32,8 @@ public class Livro extends SerializableSerializer {
 	joinColumns = @JoinColumn(name = "id_livro"), 
 	inverseJoinColumns = @JoinColumn(name = "id_categoria")
 	)
+
+	@JsonBackReference
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Livro() {
