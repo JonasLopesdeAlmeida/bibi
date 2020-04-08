@@ -44,7 +44,10 @@ public class Cliente  implements Serializable  {
 	//@CollectionTable vai criar uma tabela auxiliar para guardar os telefones.
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
-
+    
+	@OneToMany(mappedBy="cliente")
+	//O cliente tem uma lista de emprestimos.
+	private List<Emprestimo> emprestimos = new ArrayList<>();
 	
 	public Cliente() {
 		
@@ -125,6 +128,16 @@ public class Cliente  implements Serializable  {
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+	
+	
+
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
 	}
 
 	@Override
