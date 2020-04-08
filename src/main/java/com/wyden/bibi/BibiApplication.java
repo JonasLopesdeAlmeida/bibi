@@ -8,8 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.wyden.bibi.model.Categoria;
+import com.wyden.bibi.model.Cliente;
+import com.wyden.bibi.model.Endereco;
 import com.wyden.bibi.model.Livro;
+import com.wyden.bibi.model.enums.TipoCliente;
 import com.wyden.bibi.repositories.CategoriaRepository;
+import com.wyden.bibi.repositories.ClienteRepository;
+import com.wyden.bibi.repositories.EnderecoRepository;
 import com.wyden.bibi.repositories.LivroRepository;
 
 @SpringBootApplication
@@ -20,6 +25,12 @@ public class BibiApplication implements CommandLineRunner{
 	
 	@Autowired
 	private LivroRepository livroRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(BibiApplication.class, args);
@@ -57,7 +68,16 @@ public class BibiApplication implements CommandLineRunner{
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		livroRepository.saveAll(Arrays.asList(L1,L2,L3,L4,L5,L6,L7,L8));
 	
+		
+		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com", TipoCliente.ALUNO);
+	   //ligando o cliente aos telefones dele.
+		cli1.getTelefones().addAll(Arrays.asList("98984967055","98988665858"));
+	    Endereco e1 = new Endereco(null, "Rua n", "9", "Quadra 10", "Planalto Anil III", "65050883", cli1);
 	
+	    cli1.getEnderecos().addAll(Arrays.asList(e1));
+	    
+	    clienteRepository.saveAll(Arrays.asList(cli1));
+	    enderecoRepository.saveAll(Arrays.asList(e1));
 	}
 
 }
