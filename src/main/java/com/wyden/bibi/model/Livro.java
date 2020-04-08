@@ -15,7 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,12 +27,13 @@ public class Livro implements Serializable {
 	private Integer quantidade;
 	private String titulo, autor, editora, isbn;
 
+	@JsonIgnore
 	// livros tb possi uma lista de categorias.
 	@ManyToMany
 	// cria uma tabela secular quando se tem associacao muitos para muitos.
 	@JoinTable(name = "Livro_Categoria", joinColumns = @JoinColumn(name = "id_livro"), inverseJoinColumns = @JoinColumn(name = "id_categoria"))
 
-	@JsonBackReference
+	
 	private List<Categoria> categorias = new ArrayList<>();
 
 	@JsonIgnore
