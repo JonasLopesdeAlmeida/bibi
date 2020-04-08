@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Livro implements Serializable {
@@ -35,6 +36,7 @@ public class Livro implements Serializable {
 	@JsonBackReference
 	private List<Categoria> categorias = new ArrayList<>();
 
+	@JsonIgnore
 	// Mais uma vez O set vai garantir que eu tenha item repetido no emprestimo.
 	@OneToMany(mappedBy="id.livro")
 	private Set<ItemEmprestimo> itens = new HashSet<>();
@@ -53,6 +55,8 @@ public class Livro implements Serializable {
 		this.isbn = isbn;
 	}
 
+	//nao serializar essa lista tb.
+	@JsonIgnore
 	//O livro conhece os EMPRESTIMOS. Dessa forma foi criado um getEmprestimos
 	//para varendo os itens de emprestimo e criando uma lista emprestimos associados a esses itens.
 	public List<Emprestimo> getEmprestimos() {

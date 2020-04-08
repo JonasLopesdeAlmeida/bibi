@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemEmprestimo implements Serializable  {
 	private static final long serialVersionUID = 1L;
@@ -14,7 +16,8 @@ public class ItemEmprestimo implements Serializable  {
 	// Dessa forma tera uma chave composta contendo o Livro e
 	// Emprestimo.
 	
-	
+	//nao vai ser serializado.
+	@JsonIgnore
 	@EmbeddedId
 	//anotacao usada para dizer que esse id esta embutido em uma classe auxiliar.
 	private ItemEmprestimoPK id = new ItemEmprestimoPK();
@@ -37,12 +40,14 @@ public class ItemEmprestimo implements Serializable  {
 		this.quantidade = quantidade;
 		this.valor = valor;
 	}
+	
+	@JsonIgnore
 	//atribuindo os get`s para Emprestimo e Livro para ter acesso a eles fora da classe ItemEmprestimo.
 	public Emprestimo getEmprestimo() {
 		
 		return id.getEmprestimo();
 	}
-	
+
 	public Livro getLivro() {
 		
 		return id.getLivro();
