@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wyden.bibi.model.enums.TipoCliente;
 
 @Entity
@@ -29,6 +30,8 @@ public class Cliente  implements Serializable  {
 	//porem no fronte ele sera apresentado com um tipo string.
 	private Integer tipo;
 	
+	
+	@JsonManagedReference
 	//um cliente tem varios enderecos. Uma lista de enderecos.
 	//Obs: no endereco ja esta mapeado o cliente. aqui no cliente sera mapeado pelo cliente do lado de enderecos.
 	@OneToMany(mappedBy="cliente")

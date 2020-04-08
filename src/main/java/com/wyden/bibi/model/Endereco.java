@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Endereco  implements Serializable  {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +19,9 @@ public class Endereco  implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id_endereco;
 	private String logradouro, numero, complemento, bairro,cep;
+	
+	
+	@JsonBackReference
 	//fazendo associacao de endereco com cliente
     @ManyToOne
     //notacao que define o nome da chave estrageira na tabela do banco.
