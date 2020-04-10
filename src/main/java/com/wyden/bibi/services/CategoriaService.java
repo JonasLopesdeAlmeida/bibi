@@ -3,10 +3,12 @@ package com.wyden.bibi.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.wyden.bibi.model.Categoria;
 import com.wyden.bibi.repositories.CategoriaRepository;
+import com.wyden.bibi.services.exceptions.DataIntegrityException;
 import com.wyden.bibi.services.exceptions.ObjectNotFoundException;
 
 
@@ -33,6 +35,19 @@ public class CategoriaService {
 		//chamando o metodo find caso nao exista o id ele me retorna a excecao.
 		find(obj.getId_categoria());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}
+		catch(DataIntegrityViolationException e) {
+			//Tratamento de exceção personalizado para alertar a falha ao excluir uma categoria deu possui livros atrelas a ela..
+			throw new DataIntegrityException("Não é possivel excluir uma categoria que contem livros.");
+			
+		}
+		
 	}
 	
 }

@@ -48,4 +48,15 @@ public class CategoriaResource {
     return ResponseEntity.noContent().build();
 }
 	
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	// metodo que encapsula todas as erequisicoes HTTP. ? para dizer que pode ser
+	// qualquer um.
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+
+	}
+	
 	}
