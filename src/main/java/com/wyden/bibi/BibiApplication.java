@@ -1,5 +1,6 @@
 package com.wyden.bibi;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.wyden.bibi.model.Categoria;
 import com.wyden.bibi.model.Cliente;
+import com.wyden.bibi.model.Emprestimo;
 import com.wyden.bibi.model.Endereco;
+import com.wyden.bibi.model.ItemEmprestimo;
 import com.wyden.bibi.model.Livro;
 import com.wyden.bibi.model.enums.TipoCliente;
 import com.wyden.bibi.repositories.CategoriaRepository;
 import com.wyden.bibi.repositories.ClienteRepository;
+import com.wyden.bibi.repositories.EmprestimoRepository;
 import com.wyden.bibi.repositories.EnderecoRepository;
+import com.wyden.bibi.repositories.ItemEmprestimoRepository;
 import com.wyden.bibi.repositories.LivroRepository;
 
 @SpringBootApplication
@@ -31,6 +36,12 @@ public class BibiApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private EmprestimoRepository emprestimoRepository;
+	
+	@Autowired
+	private ItemEmprestimoRepository itememprestimoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(BibiApplication.class, args);
@@ -78,5 +89,20 @@ public class BibiApplication implements CommandLineRunner{
 	    
 	    clienteRepository.saveAll(Arrays.asList(cli1));
 	    enderecoRepository.saveAll(Arrays.asList(e1));
+	    
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm" );
+	    
+	    Emprestimo emp1 = new Emprestimo(null, sdf.parse("10/04/2020 12:30"), cli1, e1);
+	 
+	    cli1.getEmprestimos().addAll(Arrays.asList(emp1));
+	     
+	    emprestimoRepository.saveAll(Arrays.asList(emp1));
+	
+	    ItemEmprestimo iep1 = new ItemEmprestimo(L5, emp1, null, 1, null);
+	    
+	    emp1.getItens().addAll(Arrays.asList(iep1));
+	    L5.getItens().addAll(Arrays.asList(iep1));
+	    
+	    itememprestimoRepository.saveAll(Arrays.asList(iep1));
 	}
 }

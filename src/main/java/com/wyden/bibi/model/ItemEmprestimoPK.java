@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 //anotacao que aponta a classe com um subtipo.
 @Embeddable
-//Essa e a classe auxiliar que vai a chava primaria/composta de Itempedido
+//Essa e a classe auxiliar que vai a chave primaria/composta de Itempedido
 public class ItemEmprestimoPK implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	//referencias para Livro e Emprestimo.

@@ -26,7 +26,9 @@ public class Emprestimo implements Serializable  {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 	
-	
+//	@JsonFormat(pattern="dd/MM/yyyy")
+//	private String datadeentrega;
+//	
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -50,6 +52,7 @@ public class Emprestimo implements Serializable  {
 		this.instante = instante;
 		this.cliente = cliente;
 		this.enderecoDoCliente = enderecoDoCliente;
+		//this.datadeentrega = datadeentrega;
 	}
 
 	public Integer getId_emprestimo() {
@@ -92,6 +95,10 @@ public class Emprestimo implements Serializable  {
 		this.itens = itens;
 	}
     
+//	public String getDatadeentrega() {
+//		return datadeentrega;
+//	}
+
 	
 	@Override
 	public int hashCode() {
