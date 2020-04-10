@@ -22,7 +22,7 @@ public class ResourceExceptionHandler {
 	 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 	
-	
+	//Tratamento de exceção personalizado para BAD_REQUEST.
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardError>dataIntegrity(DataIntegrityException e, HttpServletRequest request){
 		
