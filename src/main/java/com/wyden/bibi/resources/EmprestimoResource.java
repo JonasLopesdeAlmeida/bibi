@@ -19,9 +19,9 @@ public class EmprestimoResource {
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	//metodo que encapsula todas as erequisicoes HTTP. ? para dizer que pode ser qualquer um.
-	public ResponseEntity<?> buscar(@PathVariable Integer id) {
+	public ResponseEntity<Emprestimo> find(@PathVariable Integer id) {
          
-		Emprestimo obj = service.buscar(id);
+		Emprestimo obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 		
 		

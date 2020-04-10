@@ -19,9 +19,9 @@ public class ClienteResource {
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	//metodo que encapsula todas as erequisicoes HTTP. ? para dizer que pode ser qualquer um.
-	public ResponseEntity<?> buscar(@PathVariable Integer id) {
+	public ResponseEntity<Cliente> find(@PathVariable Integer id) {
          
-		Cliente obj = service.buscar(id);
+		Cliente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 		
 		

@@ -15,7 +15,7 @@ public class EmprestimoService {
 	@Autowired
     private EmprestimoRepository  repo;
 	
-	public Emprestimo buscar(Integer id) {
+	public Emprestimo find(Integer id) {
 		Optional<Emprestimo> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Emprestimo não encontrado! Id: " + id + ", Tipo: " + Emprestimo.class.getName()));
