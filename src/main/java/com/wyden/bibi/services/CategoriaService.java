@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wyden.bibi.model.Categoria;
@@ -55,5 +58,16 @@ public class CategoriaService {
 		return repo.findAll();
 		
 	}
+	
+	//**PAGINACAO**//
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+	    //PAGEREQUEST PREPARA AS REQUISICOES PARA FAZER A CONSULTA NO BANCO DE DADOS.
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),
+				orderBy);
+		//AQUI RETONA A PAGINA A PARTIR DO pageRequest.
+		return repo.findAll(pageRequest);
+		
+	}
+	
 	
 }

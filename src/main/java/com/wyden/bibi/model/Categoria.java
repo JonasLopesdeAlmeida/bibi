@@ -17,7 +17,7 @@ public class Categoria  implements Serializable  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id_categoria;
-	private String nome_categoria;
+	private String nome;
 	
 	
 	//uma categoria possui uma lista de livros
@@ -30,10 +30,10 @@ public class Categoria  implements Serializable  {
 		
 	}
 	
-	public Categoria(Integer id_categoria, String nome_categoria) {
+	public Categoria(Integer id_categoria, String nome) {
 		super();
 		this.id_categoria = id_categoria;
-		this.nome_categoria = nome_categoria;
+		this.nome = nome;
 	}
 
 	public Integer getId_categoria() {
@@ -45,11 +45,11 @@ public class Categoria  implements Serializable  {
 	}
 
 	public String getNome_categoria() {
-		return nome_categoria;
+		return nome;
 	}
 
-	public void setNome_categoria(String nome_categoria) {
-		this.nome_categoria = nome_categoria;
+	public void setNome_categoria(String nome) {
+		this.nome = nome;
 	}
 
 	

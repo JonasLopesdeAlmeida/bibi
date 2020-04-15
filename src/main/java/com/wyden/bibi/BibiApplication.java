@@ -50,8 +50,14 @@ public class BibiApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Categoria cat1 = new Categoria(null, "Informatica");
-		Categoria cat2 = new Categoria(null, "Egenharias");
+		Categoria cat1 = new Categoria(null, "ADS");
+		Categoria cat2 = new Categoria(null, "Egenharia Elétrica");
+		Categoria cat3 = new Categoria(null, "Segurança da Informação");
+		Categoria cat4 = new Categoria(null, "Egenharia Civil");
+		Categoria cat5 = new Categoria(null, "Egenharia de Produção");
+		Categoria cat6 = new Categoria(null, "Estatística");
+		Categoria cat7 = new Categoria(null, "GTI");
+		
 		
 		Livro L1 = new Livro(null, 4, "ENGENHARIA DE SOFTWARE - 9ªED.(2011)", "Ian Sommerville", "Pearson Universidades", "9788579361081");
 		Livro L2 = new Livro(null, 3, "REDES DE COMPUTADORES - 5ªED.(2011)", "Tanenbaum", "Pearson Universidades", "9788576059240");
@@ -76,7 +82,7 @@ public class BibiApplication implements CommandLineRunner{
 		L7.getCategorias().addAll(Arrays.asList(cat2));
 		
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
 		livroRepository.saveAll(Arrays.asList(L1,L2,L3,L4,L5,L6,L7,L8));
 	
 		
