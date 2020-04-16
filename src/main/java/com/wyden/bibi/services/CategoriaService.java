@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.wyden.bibi.dto.CategoriaDTO;
 import com.wyden.bibi.model.Categoria;
 import com.wyden.bibi.repositories.CategoriaRepository;
 import com.wyden.bibi.services.exceptions.DataIntegrityException;
@@ -69,5 +70,9 @@ public class CategoriaService {
 		
 	}
 	
+	//METODO AUXILIAR QUE INSTANCIA UMA CATEGORIA A APARTIR DE UM DTO.
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId_categoria(), objDTO.getNome());		
+	}
 	
 }

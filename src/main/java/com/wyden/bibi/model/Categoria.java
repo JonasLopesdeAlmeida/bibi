@@ -33,7 +33,7 @@ public class Categoria  implements Serializable  {
 	public Categoria(Integer id_categoria, String nome) {
 		super();
 		this.id_categoria = id_categoria;
-		this.nome = nome;
+		this.setNome(nome);
 	}
 
 	public Integer getId_categoria() {
@@ -43,16 +43,13 @@ public class Categoria  implements Serializable  {
 	public void setId_categoria(Integer id_categoria) {
 		this.id_categoria = id_categoria;
 	}
-
-	public String getNome_categoria() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome_categoria(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	
 	
 	
 	public List<Livro> getLivros() {
@@ -87,6 +84,8 @@ public class Categoria  implements Serializable  {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 

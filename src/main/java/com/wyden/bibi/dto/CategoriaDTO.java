@@ -2,6 +2,10 @@ package com.wyden.bibi.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.wyden.bibi.model.Categoria;
 
 //Classe DTO criada para trazer somente as categorias sem os livros. 
@@ -9,8 +13,12 @@ import com.wyden.bibi.model.Categoria;
 public class CategoriaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
 	private Integer id_categoria;
-	private String nome_categoria;
+	//anotacoes do bean validation.
+	@NotEmpty(message="Preenchimento obrigatorio")
+	@Length(min=3, max=100, message="O tamanho deve ser entre 3 e 100 caracteres")
+	private String nome;
 
 	// CONSTRUTOR VAZIO PODE SER IMPORTANTE PARA ALGUMAS BIBLIOTECAS DO JAVA.
 	public CategoriaDTO() {
@@ -22,24 +30,23 @@ public class CategoriaDTO implements Serializable {
 	//para instanciar o categoriaDTO a partir de uma Categoria.
 	public CategoriaDTO(Categoria obj) {
 		//atribuindo os valores para a instancia.
-		id_categoria = obj.getId_categoria();
-		nome_categoria = obj.getNome_categoria();
+		setId_categoria(obj.getId_categoria());
+		setNome(obj.getNome());
 	}
-
 	public Integer getId_categoria() {
 		return id_categoria;
 	}
-
 	public void setId_categoria(Integer id_categoria) {
 		this.id_categoria = id_categoria;
 	}
-
-	public String getNome_categoria() {
-		return nome_categoria;
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public void setNome_categoria(String nome_categoria) {
-		this.nome_categoria = nome_categoria;
-	}
+	
+	
 
 }
