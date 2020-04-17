@@ -65,7 +65,8 @@ public class Cliente  implements Serializable  {
 		this.cpf = cpf;
 		this.email = email;
 		//para pegar somente o codigo.
-		this.tipo = tipo.getCod();
+		//fazendo uma condicional caso retorne null na validacao.
+		this.tipo = (tipo==null) ? null : tipo.getCod();
 	}
 
 	public Integer getId_cliente() {
