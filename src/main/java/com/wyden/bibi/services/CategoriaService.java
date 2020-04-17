@@ -37,9 +37,10 @@ public class CategoriaService {
 	
 	
 	public Categoria update(Categoria obj ) {
+		Categoria newObj = find(obj.getId_categoria());
 		//chamando o metodo find caso nao exista o id ele me retorna a excecao.
-		find(obj.getId_categoria());
-		return repo.save(obj);
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -74,5 +75,13 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO objDTO) {
 		return new Categoria(objDTO.getId_categoria(), objDTO.getNome());		
 	}
+	
+	//PRIVATE PQ E UM METODO AUXILIAR DA CLASSE.
+		private void updateData(Categoria newObj, Categoria obj) {
+			
+			newObj.setNome(obj.getNome());
+
+		
+		}
 	
 }
