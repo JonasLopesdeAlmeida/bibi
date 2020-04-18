@@ -25,7 +25,7 @@ public class Livro implements Serializable {
 	private Integer id_livro;
 
 	private Integer quantidade;
-	private String titulo, autor, editora, isbn;
+	private String nome, autor, editora, isbn;
 
 	@JsonIgnore
 	// livros tb possi uma lista de categorias.
@@ -45,11 +45,11 @@ public class Livro implements Serializable {
 
 	}
 
-	public Livro(Integer id_livro, Integer quantidade, String titulo, String autor, String editora, String isbn) {
+	public Livro(Integer id_livro, Integer quantidade, String nome, String autor, String editora, String isbn) {
 		super();
 		this.id_livro = id_livro;
 		this.quantidade = quantidade;
-		this.titulo = titulo;
+		this.nome = nome;
 		this.autor = autor;
 		this.editora = editora;
 		this.isbn = isbn;
@@ -89,12 +89,12 @@ public class Livro implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getAutor() {
