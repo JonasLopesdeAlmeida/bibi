@@ -43,10 +43,10 @@ public class CategoriaService {
 		return repo.save(newObj);
 	}
 	
-	public void delete(Integer id) {
-		find(id);
+	public void delete(Integer id_categoria) {
+		find(id_categoria);
 		try {
-			repo.deleteById(id);
+			repo.deleteById(id_categoria);
 		}
 		catch(DataIntegrityViolationException e) {
 			//Tratamento de exceção personalizado para alertar a falha ao excluir uma categoria deu possui livros atrelas a ela..
@@ -72,8 +72,9 @@ public class CategoriaService {
 	}
 	
 	//METODO AUXILIAR QUE INSTANCIA UMA CATEGORIA A APARTIR DE UM DTO.
-	public Categoria fromDTO(CategoriaDTO objDTO) {
-		return new Categoria(objDTO.getId_categoria(), objDTO.getNome());		
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId_categoria(), objDto.getNome());
+		
 	}
 	
 	//PRIVATE PQ E UM METODO AUXILIAR DA CLASSE.

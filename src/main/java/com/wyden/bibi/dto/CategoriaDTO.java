@@ -26,12 +26,12 @@ public class CategoriaDTO implements Serializable {
 	}
     //Uma sobrecarga do construtor para converter uma lista de categorias...
 	//para uma lista de categoriaDTO. 
-	//Dessa forma, o construtor recebe um objeto correspondente da minha intidade Categoria..
+	//Dessa forma, o construtor recebe um objeto correspondente da minha entidade Categoria..
 	//para instanciar o categoriaDTO a partir de uma Categoria.
 	public CategoriaDTO(Categoria obj) {
 		//atribuindo os valores para a instancia.
-		setId_categoria(obj.getId_categoria());
-		setNome(obj.getNome());
+		id_categoria = obj.getId_categoria();
+		nome= obj.getNome();
 	}
 	public Integer getId_categoria() {
 		return id_categoria;
@@ -45,7 +45,6 @@ public class CategoriaDTO implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	
 	
 

@@ -1,5 +1,6 @@
 package com.wyden.bibi.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wyden.bibi.dto.ClienteDTO;
+import com.wyden.bibi.dto.ClienteNewDTO;
 import com.wyden.bibi.model.Cliente;
 import com.wyden.bibi.services.ClienteService;
 
@@ -34,6 +37,18 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 		
 		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	//@RequestBody anotcao que faz o Json ser convertido para um objeto automaticamente.
+	//@Valid vai fazer a validacao do categoria DTO ANTES de passar a requisicao.
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO) {
+		Cliente obj = service.fromDTO(objDTO);
+		obj = service.insert(obj);
+		// pegando a url e passando o numero de resposta.
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_cliente()).toUri();
+		
+	   return ResponseEntity.created(uri).build();
 	}
 	
 	

@@ -65,7 +65,7 @@ public class Cliente  implements Serializable  {
 		this.cpf = cpf;
 		this.email = email;
 		//para pegar somente o codigo.
-		//fazendo uma condicional caso retorne null na validacao.
+		//fazendo uma condicional caso ret
 		this.tipo = (tipo==null) ? null : tipo.getCod();
 	}
 
@@ -167,6 +167,7 @@ public class Cliente  implements Serializable  {
 			return false;
 		return true;
 	}
+
 	
 	
 	

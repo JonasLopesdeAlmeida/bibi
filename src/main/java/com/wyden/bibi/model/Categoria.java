@@ -33,7 +33,7 @@ public class Categoria  implements Serializable  {
 	public Categoria(Integer id_categoria, String nome) {
 		super();
 		this.id_categoria = id_categoria;
-		this.setNome(nome);
+		this.nome = nome;
 	}
 
 	public Integer getId_categoria() {
@@ -43,23 +43,6 @@ public class Categoria  implements Serializable  {
 	public void setId_categoria(Integer id_categoria) {
 		this.id_categoria = id_categoria;
 	}
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	
-	public List<Livro> getLivros() {
-		return livros;
-	}
-
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -83,6 +66,23 @@ public class Categoria  implements Serializable  {
 		} else if (!id_categoria.equals(other.id_categoria))
 			return false;
 		return true;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
 	}
 
 	

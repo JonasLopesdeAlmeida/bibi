@@ -41,18 +41,21 @@ public class CategoriaResource {
 	@RequestMapping(method = RequestMethod.POST)
 	//@RequestBody anotcao que faz o Json ser convertido para um objeto automaticamente.
 	//@Valid vai fazer a validacao do categoria DTO ANTES de passar a requisicao.
-	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDTO) {
-		Categoria obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
+		Categoria obj = service.fromDTO(objDto);
+		//esqueci de colocar essa linha de codigo e por isso nao estava inserindo.
+		obj = service.insert(obj);
 		// pegando a url e passando o numero de resposta.
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_categoria()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId_categoria()).toUri();
 		
 	   return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDTO, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDTO, @PathVariable Integer id_categoria) {
 	Categoria obj = service.fromDTO(objDTO);
-	obj.setId_categoria(id);
+	obj.setId_categoria(id_categoria);
     obj = service.update(obj);
     return ResponseEntity.noContent().build();
 }
@@ -61,9 +64,9 @@ public class CategoriaResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	// metodo que encapsula todas as erequisicoes HTTP. ? para dizer que pode ser
 	// qualquer um.
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id_categoria) {
 
-		service.delete(id);
+		service.delete(id_categoria);
 		return ResponseEntity.noContent().build();
 
 	}
@@ -73,8 +76,8 @@ public class CategoriaResource {
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		List<Categoria> list = service.findAll();
 		//linha de codigo responsavel para converter uma lista para outra lista usando o "map" com uma arrow function. ->
-		List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
+		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 
 	}
 	
