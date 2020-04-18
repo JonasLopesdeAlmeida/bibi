@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,17 @@ public class Cliente  implements Serializable  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id_cliente;
-	private String nome, matricula, cpf, email;
+	private String nome;
+	
+	@Column(unique=true)
+	private String matricula;
+	
+	@Column(unique=true)
+	private String cpf;
+	
+	@Column(unique=true)
+	private String email;
+	
 	//internamente o TipoCliente sera armazenado como numero inteiro.
 	//porem no fronte ele sera apresentado com um tipo string.
 	private Integer tipo;
