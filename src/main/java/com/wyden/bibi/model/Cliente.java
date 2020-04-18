@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -34,7 +35,10 @@ public class Cliente  implements Serializable  {
 	
 	//um cliente tem varios enderecos. Uma lista de enderecos.
 	//Obs: no endereco ja esta mapeado o cliente. aqui no cliente sera mapeado pelo cliente do lado de enderecos.
-	@OneToMany(mappedBy="cliente")
+	//Obs: Toda alteracao feita em cliente sera refletida em endereco.
+	//ex: se eu deletar um cliente eu tb deleto o endereco. Pq foi determinado o CascadeType.ALL.
+	//mas se esse cliente ja estiver atrelado em um emprestimo ele nao sera apagado.
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	//telefone e uma entidade fraca dependente de cliente
