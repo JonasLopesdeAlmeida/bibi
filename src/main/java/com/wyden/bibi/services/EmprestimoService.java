@@ -11,7 +11,6 @@ import com.wyden.bibi.model.Emprestimo;
 import com.wyden.bibi.model.ItemEmprestimo;
 import com.wyden.bibi.repositories.EmprestimoRepository;
 import com.wyden.bibi.repositories.ItemEmprestimoRepository;
-import com.wyden.bibi.repositories.LivroRepository;
 import com.wyden.bibi.services.exceptions.ObjectNotFoundException;
 
 
@@ -25,7 +24,7 @@ public class EmprestimoService {
 //	@Autowired
 //    private LivroRepository  livrorepository;
 	
-	private LivroService livroService;
+	//private LivroService livroService;
 	
 	
 	
