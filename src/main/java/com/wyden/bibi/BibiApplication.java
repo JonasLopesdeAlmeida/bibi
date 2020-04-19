@@ -130,7 +130,7 @@ public class BibiApplication implements CommandLineRunner{
 	     
 	    emprestimoRepository.saveAll(Arrays.asList(emp1));
 	
-	    ItemEmprestimo iep1 = new ItemEmprestimo(L5, emp1, null, 1, null);
+	    ItemEmprestimo iep1 = new ItemEmprestimo(L5, emp1, 0.0, 1, 0.0);
 	    
 	    emp1.getItens().addAll(Arrays.asList(iep1));
 	    L5.getItens().addAll(Arrays.asList(iep1));
