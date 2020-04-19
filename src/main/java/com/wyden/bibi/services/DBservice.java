@@ -54,6 +54,7 @@ public class DBservice {
 		Categoria cat8 = new Categoria(null, "Administração");
 		
 		
+		
 		Livro L1 = new Livro(null, 4, "ENGENHARIA DE SOFTWARE - 9ªED.(2011)", "Ian Sommerville", "Pearson Universidades", "9788579361081");
 		Livro L2 = new Livro(null, 3, "REDES DE COMPUTADORES - 5ªED.(2011)", "Tanenbaum", "Pearson Universidades", "9788576059240");
 		Livro L3 = new Livro(null, 5, "Análise estrutural ", "Kassimali, Aslam", "Cengage Learning BR", "9788522118175");
