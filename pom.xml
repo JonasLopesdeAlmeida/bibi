@@ -12,6 +12,8 @@
 	<groupId>com.wyden.bibi</groupId>
 	<artifactId>bibi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
 	<name>bibi</name>
 	<description>Projeto chatbot desenvolvido para a biblioteca da
 		faculdade Wyden.</description>
