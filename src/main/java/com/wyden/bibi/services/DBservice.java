@@ -108,13 +108,17 @@ public class DBservice {
 	
 		
 		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com", TipoCliente.ALUNO);
+		Cliente cli2 = new Cliente(null, "Oberdran dos Santos", "111111", "55808114039", "oberdran@gmail.com", TipoCliente.ALUNO);
+		Cliente cli3 = new Cliente(null, "Antonio", "222222", "69151418045", "antonio@gmail.com", TipoCliente.ALUNO);
+		Cliente cli4 = new Cliente(null, "Nassib", "333333", "68677865020", "nassib@gmail.com", TipoCliente.ALUNO);
+		Cliente cli5 = new Cliente(null, "Arthur", "444444", "84367518094", "arthur@gmail.com", TipoCliente.ALUNO);
 	   //ligando o cliente aos telefones dele.
 		cli1.getTelefones().addAll(Arrays.asList("98984967055","98988665858"));
 	    Endereco e1 = new Endereco(null, "Rua n", "9", "Quadra 10", "Planalto Anil III", "65050883", cli1);
 	
 	    cli1.getEnderecos().addAll(Arrays.asList(e1));
 	    
-	    clienteRepository.saveAll(Arrays.asList(cli1));
+	    clienteRepository.saveAll(Arrays.asList(cli1,cli2,cli3,cli4,cli5));
 	    enderecoRepository.saveAll(Arrays.asList(e1));
 	    
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm" );
