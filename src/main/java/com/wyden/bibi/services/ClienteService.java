@@ -84,7 +84,7 @@ public class ClienteService {
 
 	public Cliente fromDTO(ClienteDTO objDTO) {
 
-		return new Cliente(objDTO.getId_cliente(), objDTO.getNome(), null, null, objDTO.getEmail(), null);
+		return new Cliente(objDTO.getId_cliente(), objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(), null);
 	}
 
 	public Cliente fromDTO(ClienteNewDTO objDTO) {
@@ -111,6 +111,8 @@ public class ClienteService {
 
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
+		newObj.setMatricula(obj.getMatricula());
+		newObj.setCpf(obj.getCpf());
 
 	}
 
