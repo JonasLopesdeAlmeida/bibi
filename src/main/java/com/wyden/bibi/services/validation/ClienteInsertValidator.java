@@ -38,11 +38,11 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 			list.add(new FieldMessage("Cpf", "Cpf já existente"));
 		}
 		
-		Cliente aux3 = repo.findByMatricula(objDTO.getMatricula());
-		if (aux3 != null) {
-			list.add(new FieldMessage("Matricula", "Matricula já existente"));
-		}
-		
+//		Cliente aux3 = repo.findByMatricula(objDTO.getMatricula());
+//		if (aux3 != null) {
+//			list.add(new FieldMessage("Matricula", "Matricula já existente"));
+//		}
+//		
 		
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();

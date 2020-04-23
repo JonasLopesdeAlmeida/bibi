@@ -68,16 +68,28 @@ public class ClienteService {
 
 	}
 
+	//metodo que faz a pesquisa de um cliente por matricula
+	public Page<Cliente> search(String matricula, Integer page, Integer linesPerPage, String orderBy, String direction){
+	    //PAGEREQUEST PREPARA AS REQUISICOES PARA FAZER A CONSULTA NO BANCO DE DADOS.
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),
+				orderBy);
+		
+	     //List<Cliente> clientes = repo.findAllById(ids);
+		return repo.search(matricula, pageRequest);
+		
+	}
+
 	public List<Cliente> findAll() {
 		return repo.findAll();
 
 	}
 
 	// **PAGINACAO**//
+	//metodo que mostra clientes por pagina//
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		// PAGEREQUEST PREPARA AS REQUISICOES PARA FAZER A CONSULTA NO BANCO DE DADOS.
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		// AQUI RETONA A PAGINA A PARTIR DO pageRequest.
+		//AQUI RETONA A PAGINA A PARTIR DO pageRequest.
 		return repo.findAll(pageRequest);
 
 	}

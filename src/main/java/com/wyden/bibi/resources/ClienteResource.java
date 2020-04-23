@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.wyden.bibi.dto.ClienteDTO;
 import com.wyden.bibi.dto.ClienteNewDTO;
 import com.wyden.bibi.model.Cliente;
+import com.wyden.bibi.resources.utils.URL;
 import com.wyden.bibi.services.ClienteService;
 
 @RestController
@@ -72,14 +73,14 @@ public class ClienteResource {
 	}
 	
 	//metodo para retornar somente as categorias.
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<ClienteDTO>> findAll() {
-		List<Cliente> list = service.findAll();
+	//@RequestMapping(method = RequestMethod.GET)
+	//public ResponseEntity<List<ClienteDTO>> findAll() {
+	//	List<Cliente> list = service.findAll();
 		//linha de codigo responsavel para converter uma lista para outra lista usando o "map" com uma arrow function. ->
-		List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
-
-	}
+//		List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+//		return ResponseEntity.ok().body(listDTO);
+//
+//	}
 	
 	//***PAGINACAO***//
 	@RequestMapping(value="/page", method = RequestMethod.GET)
@@ -100,6 +101,28 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDTO);
 
 	}
+	
+	//***PAGINACAO***//
+		@RequestMapping(method = RequestMethod.GET)
+		public ResponseEntity<Page<ClienteDTO>> findPage(
+				
+				@RequestParam(value="matricula", defaultValue="") String matricula,
+				
+				@RequestParam(value="page", defaultValue="0") Integer page,
+				
+				@RequestParam(value="linesPerPage", defaultValue="24")Integer linesPerPage, 
+	            //OBS: TIVE PROBLEMA COM ATRIBUTOS COMPOSTO USANDO UNDERLINE. EX: NOME_CATEGORIA.
+				//QUANDO EXCUTADO A LEITURA ERA FEITA APENAS ATE O NOME.
+				@RequestParam(value="orderBy", defaultValue="matricula")String orderBy, 
+				
+				@RequestParam(value="direction", defaultValue="ASC")String direction) {
+			
+			String nomeDecoded = URL.decodeParam(matricula);
+			Page<Cliente> list = service.search(nomeDecoded, page, linesPerPage,orderBy,direction);	
+			Page<ClienteDTO> listD = list.map(obj -> new ClienteDTO(obj));
+			return ResponseEntity.ok().body(listD);
+
+		}
 	
 
 }
