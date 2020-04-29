@@ -29,7 +29,7 @@ public class ClienteNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatorio")
 	private String matricula;
 	
-	@NotEmpty(message="Preenchimento obrigatorio")
+
 	private Integer tipo;
 	
 	@NotEmpty(message="Preenchimento obrigatorio")

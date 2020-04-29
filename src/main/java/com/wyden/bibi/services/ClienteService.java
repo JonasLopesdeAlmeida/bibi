@@ -48,6 +48,16 @@ public class ClienteService {
 		return obj;
 	}
 
+	public Cliente authenticate(String matricula) {
+		Optional<Cliente> obj = repo.findByMatricula(matricula);
+		
+		if(!obj.isPresent()) {
+			return obj.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado como a matriula: " + matricula + " informada!"));		
+		}
+		
+       return obj.get();
+	}
+	
 	public Cliente update(Cliente obj) {
 		Cliente newObj = find(obj.getId_cliente());
 		// chamando o metodo find caso nao exista o id ele me retorna a excecao.
@@ -69,16 +79,8 @@ public class ClienteService {
 	}
 
 	//metodo que faz a pesquisa de um cliente por matricula
-	public Page<Cliente> search(String matricula, Integer page, Integer linesPerPage, String orderBy, String direction){
-	    //PAGEREQUEST PREPARA AS REQUISICOES PARA FAZER A CONSULTA NO BANCO DE DADOS.
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),
-				orderBy);
-		
-	     //List<Cliente> clientes = repo.findAllById(ids);
-		return repo.search(matricula, pageRequest);
-		
-	}
-
+	//obs: esse método foi substituido pelo o método autenticar.
+	
 	public List<Cliente> findAll() {
 		return repo.findAll();
 
@@ -125,6 +127,7 @@ public class ClienteService {
 		newObj.setEmail(obj.getEmail());
 		newObj.setMatricula(obj.getMatricula());
 		newObj.setCpf(obj.getCpf());
+		newObj.setEnderecos(obj.getEnderecos());
 
 	}
 

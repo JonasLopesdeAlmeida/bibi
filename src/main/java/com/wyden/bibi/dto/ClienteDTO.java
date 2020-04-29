@@ -26,7 +26,8 @@ public class ClienteDTO implements Serializable {
 	private String matricula;
 	@CPF
 	private String cpf;
-
+	
+ 
 
 	public ClienteDTO() {
 
@@ -39,7 +40,7 @@ public class ClienteDTO implements Serializable {
 		email = obj.getEmail();
 		matricula = obj.getMatricula();
 		cpf = obj.getCpf();
-		
+
 	}
 
 	public Integer getId_cliente() {
@@ -85,6 +86,7 @@ public class ClienteDTO implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 
 
 
