@@ -27,6 +27,7 @@ public class ClienteDTO implements Serializable {
 	@CPF
 	private String cpf;
 	
+    private String senha;
  
 
 	public ClienteDTO() {
@@ -40,6 +41,8 @@ public class ClienteDTO implements Serializable {
 		email = obj.getEmail();
 		matricula = obj.getMatricula();
 		cpf = obj.getCpf();
+		senha = obj.getSenha();
+		
 
 	}
 
@@ -85,6 +88,14 @@ public class ClienteDTO implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 

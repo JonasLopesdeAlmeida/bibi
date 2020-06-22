@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wyden.bibi.model.Emprestimo;
+import com.wyden.bibi.model.Livro;
 import com.wyden.bibi.services.EmprestimoService;
+import com.wyden.bibi.services.LivroService;
 
 @RestController
 @RequestMapping(value = "/emprestimos")
@@ -20,6 +22,9 @@ public class EmprestimoResource {
 
 	@Autowired
 	private EmprestimoService service;
+	
+	@Autowired
+	private LivroService livroService;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	//metodo que encapsula todas as erequisicoes HTTP. ? para dizer que pode ser qualquer um.
@@ -35,6 +40,8 @@ public class EmprestimoResource {
 	public ResponseEntity<Void> insert(@RequestBody Emprestimo obj) {
 		//esqueci de colocar essa linha de codigo e por isso nao estava inserindo.
 		obj = service.insert(obj);
+		
+		//obj2 = livroService.updatebookquantity(obj2);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId_emprestimo()).toUri();

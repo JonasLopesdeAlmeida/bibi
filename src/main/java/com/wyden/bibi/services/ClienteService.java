@@ -48,15 +48,22 @@ public class ClienteService {
 		return obj;
 	}
 
-	public Cliente authenticate(String matricula) {
+	public Cliente authenticate(String matricula, String senha) {
+		
 		Optional<Cliente> obj = repo.findByMatricula(matricula);
 		
 		if(!obj.isPresent()) {
-			return obj.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado como a matriula: " + matricula + " informada!"));		
+			throw new ObjectNotFoundException("Cliente não encontrado como a matriula informada!");		
 		}
 		
+		if(!obj.get().getSenha().equals(senha)) {
+			throw new ObjectNotFoundException("Senha inválida!");		
+		}	
+			
        return obj.get();
 	}
+	
+	
 	
 	public Cliente update(Cliente obj) {
 		Cliente newObj = find(obj.getId_cliente());
@@ -97,13 +104,13 @@ public class ClienteService {
 	}
 
 	public Cliente fromDTO(ClienteDTO objDTO) {
-
-		return new Cliente(objDTO.getId_cliente(), objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(), null);
+               
+		return new Cliente(objDTO.getId_cliente(), objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(),objDTO.getSenha(), null);
 	}
 
 	public Cliente fromDTO(ClienteNewDTO objDTO) {
 	
-		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(), TipoCliente.toEnum(objDTO.getTipo()));
+		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(), objDTO.getSenha(), TipoCliente.toEnum(objDTO.getTipo()));
 	    Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), cli);
 	    cli.getEnderecos().add(end);
 	    //somente o telefone1 e obrigatorio.
@@ -128,6 +135,7 @@ public class ClienteService {
 		newObj.setMatricula(obj.getMatricula());
 		newObj.setCpf(obj.getCpf());
 		newObj.setEnderecos(obj.getEnderecos());
+		newObj.setSenha(obj.getSenha());
 
 	}
 

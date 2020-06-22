@@ -3,6 +3,8 @@ package com.wyden.bibi.dto;
 import java.io.Serializable;
 
 import com.wyden.bibi.model.Livro;
+import com.wyden.bibi.model.enums.StatusLivro;
+
 
 public class LivroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -11,7 +13,7 @@ public class LivroDTO implements Serializable {
 
 	private Integer quantidade;
 	private String nome, autor, editora, isbn;
-
+    private StatusLivro status;
 	public LivroDTO() {
 
 	}
@@ -23,6 +25,7 @@ public class LivroDTO implements Serializable {
 		editora = obj.getEditora();
 		autor = obj.getAutor();
 		isbn = obj.getIsbn();
+		status = obj.getStatus();
 
 	}
 
@@ -72,6 +75,14 @@ public class LivroDTO implements Serializable {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+	public StatusLivro getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusLivro status) {
+		this.status = status;
 	}
 
 }

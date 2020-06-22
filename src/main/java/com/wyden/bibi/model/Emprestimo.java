@@ -1,6 +1,7 @@
 package com.wyden.bibi.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,12 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 @Entity
+@Builder
+@AllArgsConstructor
 public class Emprestimo implements Serializable  {
 	private static final long serialVersionUID = 1L;
 
@@ -26,12 +32,14 @@ public class Emprestimo implements Serializable  {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 	
-//	@JsonFormat(pattern="dd/MM/yyyy")
-//	private String datadeentrega;
-//	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private Date datadeEntrega;
+		
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
+	
+	private double valor_multa;
     
 	@ManyToOne
 	@JoinColumn(name="endereco_do_cliente_id")
@@ -46,13 +54,14 @@ public class Emprestimo implements Serializable  {
     	
     }
 
-	public Emprestimo(Integer id_emprestimo, Date instante, Cliente cliente, Endereco enderecoDoCliente) {
+	public Emprestimo(Integer id_emprestimo, Date instante, Cliente cliente, Endereco enderecoDoCliente, Date datadeEntrega) {
 		super();
 		this.id_emprestimo = id_emprestimo;
 		this.instante = instante;
 		this.cliente = cliente;
 		this.enderecoDoCliente = enderecoDoCliente;
-		//this.datadeentrega = datadeentrega;
+		this.datadeEntrega = datadeEntrega;
+		//this.setValor_multa(valor_multa);
 	}
 
 	public Integer getId_emprestimo() {
@@ -94,12 +103,24 @@ public class Emprestimo implements Serializable  {
 	public void setItens(Set<ItemEmprestimo> itens) {
 		this.itens = itens;
 	}
-    
-//	public String getDatadeentrega() {
-//		return datadeentrega;
-//	}
 
+	public Date getDatadeEntrega() {
+		return datadeEntrega;
+	}
+
+	public void setDatadeEntrega(Date datadeEntrega) {
+		this.datadeEntrega = datadeEntrega;
+	}
 	
+	public double getValor_multa() {
+		return valor_multa;
+	}
+
+	public void setValor_multa(double valor_multa) {
+		this.valor_multa = valor_multa;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -125,6 +146,27 @@ public class Emprestimo implements Serializable  {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm" );
+		builder.append("Emprestimo número: ");
+		builder.append(getId_emprestimo());
+		builder.append(", Data do emprestimo: ");
+		builder.append(sdf.format(getInstante()));
+		builder.append(", Data de devolução: ");
+		builder.append(sdf.format(getDatadeEntrega()));
+		builder.append(", Cliente: ");
+		builder.append(getCliente().getNome());
+		builder.append("\nDetalhes: \n");
+		for(ItemEmprestimo ip : getItens()) {
+			builder.append(ip.toString());
+		}	
+		return builder.toString();
+	}
+
+	
+	
 
     
 

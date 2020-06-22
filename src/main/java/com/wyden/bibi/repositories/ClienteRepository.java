@@ -24,10 +24,24 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	@org.springframework.transaction.annotation.Transactional(readOnly = true)
     Optional<Cliente>findByMatricula(String matricula);
 	
-		
+//	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+//    Optional<Cliente>findBySenha(String senha);
+	
+	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	//Obs: REFATORANDO E VERICANDO QUE NÃO EXISTE A NECESSIDADE DE UMA BUSCA JPQL 
 	//PARA UMA CONSULTA PAGINADA DE CLIENTE. TENDO EM VISTA QUE UM CLIENTE SÓ POSSUI UMA MATRICULA.
-	//OU SEJA, PARA CADA MATRICULA EU SOTENHO O RETORNO DE UM ÚNICO CLIENTE.
+	//OU SEJA, PARA CADA MATRICULA EU SO TENHO O RETORNO DE UM ÚNICO CLIENTE.
 	
 	//consulta JPQL FAZENDO UMA BUSCA DE UM CLIENTE POR MATRICULA
 //	@org.springframework.transaction.annotation.Transactional(readOnly = true)

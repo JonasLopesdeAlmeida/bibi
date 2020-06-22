@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,19 +18,27 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wyden.bibi.model.enums.StatusLivro;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 @Entity
+@Builder
+@AllArgsConstructor
 public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_livro;
 
-	private Integer quantidade;
+	private Integer quantidade = 0;
 	private String nome, autor, editora, isbn;
+	@Enumerated(value = EnumType.STRING)
+	private StatusLivro status;
 
 	@JsonIgnore
-	// livros tb possi uma lista de categorias.
+	// livros tb possui uma lista de categorias.
 	@ManyToMany
 	// cria uma tabela secular quando se tem associacao muitos para muitos.
 	@JoinTable(name = "Livro_Categoria", joinColumns = @JoinColumn(name = "id_livro"), inverseJoinColumns = @JoinColumn(name = "id_categoria"))
@@ -45,7 +55,7 @@ public class Livro implements Serializable {
 
 	}
 
-	public Livro(Integer id_livro, Integer quantidade, String nome, String autor, String editora, String isbn) {
+	public Livro(Integer id_livro, Integer quantidade, String nome, String autor, String editora, String isbn, StatusLivro status) {
 		super();
 		this.id_livro = id_livro;
 		this.quantidade = quantidade;
@@ -53,7 +63,9 @@ public class Livro implements Serializable {
 		this.autor = autor;
 		this.editora = editora;
 		this.isbn = isbn;
+		this.status = status;
 	}
+	
 
 	//nao serializar essa lista tb.
 	@JsonIgnore
@@ -82,6 +94,7 @@ public class Livro implements Serializable {
 	}
 
 	public Integer getQuantidade() {
+		
 		return quantidade;
 	}
 
@@ -135,6 +148,15 @@ public class Livro implements Serializable {
 
 	public void setItens(Set<ItemEmprestimo> itens) {
 		this.itens = itens;
+	}
+
+	
+	public StatusLivro getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusLivro status) {
+		this.status = status;
 	}
 
 	@Override

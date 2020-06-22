@@ -109,8 +109,7 @@ public class ClienteResource {
 	@PostMapping("/autenticar")
 	public ResponseEntity authenticate(@RequestBody ClienteDTO obj) {		
 		   try {
-			   Cliente clienteAutenticado =  service.authenticate(obj.getMatricula());
-			     //aqui retornando o codigo 200 e o corpo da requisicao.  
+			   Cliente clienteAutenticado = service.authenticate(obj.getMatricula(), obj.getSenha());  
 				 return ResponseEntity.ok(clienteAutenticado);
 			   }catch (DataIntegrityException d){
 				 return ResponseEntity.badRequest().body(d.getMessage());

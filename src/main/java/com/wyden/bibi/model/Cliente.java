@@ -19,7 +19,16 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyden.bibi.model.enums.TipoCliente;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+
+
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cliente  implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	
@@ -38,18 +47,18 @@ public class Cliente  implements Serializable  {
 	@Column(unique=true)
 	private String email;
 	
+	private String senha;
+	
 	//internamente o TipoCliente sera armazenado como numero inteiro.
 	//porem no fronte ele sera apresentado com um tipo string.
 	private Integer tipo;
-	
-	
-	
+
 	//um cliente tem varios enderecos. Uma lista de enderecos.
 	//Obs: no endereco ja esta mapeado o cliente. aqui no cliente sera mapeado pelo cliente do lado de enderecos.
 	//Obs: Toda alteracao feita em cliente sera refletida em endereco.
 	//ex: se eu deletar um cliente eu tb deleto o endereco. Pq foi determinado o CascadeType.ALL.
 	//mas se esse cliente ja estiver atrelado em um emprestimo ele nao sera apagado.
-	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="cliente",  cascade = {CascadeType.ALL})
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	//telefone e uma entidade fraca dependente de cliente
@@ -65,20 +74,18 @@ public class Cliente  implements Serializable  {
 	@OneToMany(mappedBy="cliente")
 	//O cliente tem uma lista de emprestimos.
 	private List<Emprestimo> emprestimos = new ArrayList<>();
+
 	
-	public Cliente() {
-		
-		
-	}
 
    //Obs: colecoes nao entram no construtor: Endereco e Telefone.
-	public Cliente(Integer id_cliente, String nome, String matricula, String cpf, String email, TipoCliente tipo) {
+	public Cliente(Integer id_cliente, String nome, String matricula, String cpf, String email,String senha, TipoCliente tipo) {
 		super();
 		this.id_cliente = id_cliente;
 		this.nome = nome;
 		this.matricula = matricula;
 		this.cpf = cpf;
 		this.email = email;
+		this.senha = senha;
 		//para pegar somente o codigo.
 		//fazendo uma condicional caso ret
 		this.tipo = (tipo==null) ? null : tipo.getCod();
@@ -123,6 +130,16 @@ public class Cliente  implements Serializable  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 
 	public TipoCliente getTipo() {
 		return TipoCliente.toEnum(tipo);
@@ -183,10 +200,5 @@ public class Cliente  implements Serializable  {
 		return true;
 	}
 
-	
 
-	
-	
-	
-	
 }

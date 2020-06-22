@@ -13,6 +13,7 @@ import com.wyden.bibi.model.Emprestimo;
 import com.wyden.bibi.model.Endereco;
 import com.wyden.bibi.model.ItemEmprestimo;
 import com.wyden.bibi.model.Livro;
+import com.wyden.bibi.model.enums.StatusLivro;
 import com.wyden.bibi.model.enums.TipoCliente;
 import com.wyden.bibi.repositories.CategoriaRepository;
 import com.wyden.bibi.repositories.ClienteRepository;
@@ -52,24 +53,24 @@ public class DBservice {
 		Categoria cat6 = new Categoria(null, "Designer");
 		Categoria cat7 = new Categoria(null, "Gestão de Tecnologia da Informação");
 		Categoria cat8 = new Categoria(null, "Administração");
+	//	lancamento.setStatus(StatusLancamento.PENDENTE);
 		
 		
-		
-		Livro L1 = new Livro(null, 4, "ENGENHARIA DE SOFTWARE - 9ªED.(2011)", "Ian Sommerville", "Pearson Universidades", "9788579361081");
-		Livro L2 = new Livro(null, 3, "REDES DE COMPUTADORES - 5ªED.(2011)", "Tanenbaum", "Pearson Universidades", "9788576059240");
-		Livro L3 = new Livro(null, 5, "Análise estrutural ", "Kassimali, Aslam", "Cengage Learning BR", "9788522118175");
-		Livro L4 = new Livro(null, 6, "ANALISE BASICA DE CIRCUITOS PARA ENGENHARIA - 10ªED.(2013)", "J. David Irwin; R. Mark Nelms ", "LTC", "9788521621805");
-		Livro L5 = new Livro(null, 2, "O codificador limpo", "Bob Martin ", "Alta Books", "978-85-7608-647-5");
-		Livro L6 = new Livro(null, 6, "LOGICA DE PROGRAMAÇAO: A CONSTRUÇAO DE ALGORITMOS E ESTRUTURAS DE DADOS - 3ªED.(2005)", " Andre Luiz Villar Forbellone; Henri Frederico Eberspacher ", "Pearson Universidades", "978-85-7605-024-7");
-		Livro L7 = new Livro(null, 4, "CONSTRUÇAO CIVIL / TEORIA E PRATICA: TOPOGRAFIA", "Us Navy", "Hemus", "978-85-2890-551-9");
-		Livro L8 = new Livro(null, 2, "Descobrindo o LINUX: ENTENDA O SISTEMA...3ªED.(2012) ", "Joao Eriberto Mota Filho", "Novatec", "978-88-7522-278-2");
-		Livro L9 = new Livro(null, 2, "INTRODUÇAO A ENGENHARIA DE PRODUÇAO: CONCEITOS E CASOS PRATICOS - 1ªED.(2016)", "Orlando Roque da Silva", " LTC", "9788521627173");
-		Livro L10 = new Livro(null, 2, "PESQUISA QUALITATIVA EM ENGENHARIA DE PRODUÇAO E GESTAO DE OPERAÇOES - 1ªED.(2018)", "Davi Nakano", "Atlas", "9788597018608");
-		Livro L11 = new Livro(null, 2, "INTRODUÇAO A TEORIA GERAL DA ADMINISTRAÇAO 9ª EDIÇAO 2014 - 9ªED.(2014)", "Idalberto Chiavenato ", "Manole", "9788520436691");
-		Livro L12 = new Livro(null, 2, "DECOR YEAR BOOK BRASIL VOL. 12: ANUARIO BRASILEIRO DOS DESIGNERS DE INTERIORES - 1ªED.(2006)", "Antonio Carlos Gouveia Junior ", "Decor", "9788599742044");
-		Livro L13 = new Livro(null, 2, "TECNOLOGIA DA INFORMAÇAO: PLANEJAMENTO E GESTAO DE ESTRATEGIAS - 1ªED.(2008)", "Fernando Jose Barbin Laurindo ", "Atlas", "9788522451166");
-		Livro L14 = new Livro(null, 2, "GESTAO DE TECNOLOGIA DA INFORMAÇAO: GOVERNANÇA DE TI - ARQUITETURA E ALINHAMENTO ENTRE SISTEMAS DE INFORMAÇAO E O NEGOCIO - 1ªED.(2011)", "Karoll Haussler Carneiro Ramos", "LTC", "9788521617723");
-		Livro L15 = new Livro(null, 2, "INTRODUÇAO A ENGENHARIA CIVIL - 1ªED.(2016)", "Edward S. Neumann ", "Gen", "9788535271836");
+		Livro L1 = new Livro(null, 1, "ENGENHARIA DE SOFTWARE - 9ªED.(2011)", "Ian Sommerville", "Pearson Universidades", "9788579361081", StatusLivro.DISPONIVEL);
+		Livro L2 = new Livro(null, 3, "REDES DE COMPUTADORES - 5ªED.(2011)", "Tanenbaum", "Pearson Universidades", "9788576059240", StatusLivro.DISPONIVEL );
+		Livro L3 = new Livro(null, 5, "Análise estrutural ", "Kassimali, Aslam", "Cengage Learning BR", "9788522118175", StatusLivro.DISPONIVEL );
+		Livro L4 = new Livro(null, 6, "ANALISE BASICA DE CIRCUITOS PARA ENGENHARIA - 10ªED.(2013)", "J. David Irwin; R. Mark Nelms ", "LTC", "9788521621805", StatusLivro.DISPONIVEL);
+		Livro L5 = new Livro(null, 2, "O codificador limpo", "Bob Martin ", "Alta Books", "978-85-7608-647-5", StatusLivro.DISPONIVEL );
+		Livro L6 = new Livro(null, 6, "LOGICA DE PROGRAMAÇAO: A CONSTRUÇAO DE ALGORITMOS E ESTRUTURAS DE DADOS - 3ªED.(2005)", " Andre Luiz Villar Forbellone; Henri Frederico Eberspacher ", "Pearson Universidades", "978-85-7605-024-7", StatusLivro.DISPONIVEL);
+		Livro L7 = new Livro(null, 4, "CONSTRUÇAO CIVIL / TEORIA E PRATICA: TOPOGRAFIA", "Us Navy", "Hemus", "978-85-2890-551-9", StatusLivro.DISPONIVEL);
+		Livro L8 = new Livro(null, 2, "Descobrindo o LINUX: ENTENDA O SISTEMA...3ªED.(2012) ", "Joao Eriberto Mota Filho", "Novatec", "978-88-7522-278-2", StatusLivro.DISPONIVEL);
+		Livro L9 = new Livro(null, 2, "INTRODUÇAO A ENGENHARIA DE PRODUÇAO: CONCEITOS E CASOS PRATICOS - 1ªED.(2016)", "Orlando Roque da Silva", " LTC", "9788521627173", StatusLivro.DISPONIVEL);
+		Livro L10 = new Livro(null, 2, "PESQUISA QUALITATIVA EM ENGENHARIA DE PRODUÇAO E GESTAO DE OPERAÇOES - 1ªED.(2018)", "Davi Nakano", "Atlas", "9788597018608", StatusLivro.DISPONIVEL);
+		Livro L11 = new Livro(null, 2, "INTRODUÇAO A TEORIA GERAL DA ADMINISTRAÇAO 9ª EDIÇAO 2014 - 9ªED.(2014)", "Idalberto Chiavenato ", "Manole", "9788520436691", StatusLivro.DISPONIVEL);
+		Livro L12 = new Livro(null, 2, "DECOR YEAR BOOK BRASIL VOL. 12: ANUARIO BRASILEIRO DOS DESIGNERS DE INTERIORES - 1ªED.(2006)", "Antonio Carlos Gouveia Junior ", "Decor", "9788599742044", StatusLivro.DISPONIVEL);
+		Livro L13 = new Livro(null, 2, "TECNOLOGIA DA INFORMAÇAO: PLANEJAMENTO E GESTAO DE ESTRATEGIAS - 1ªED.(2008)", "Fernando Jose Barbin Laurindo ", "Atlas", "9788522451166", StatusLivro.DISPONIVEL);
+		Livro L14 = new Livro(null, 2, "GESTAO DE TECNOLOGIA DA INFORMAÇAO: GOVERNANÇA DE TI - ARQUITETURA E ALINHAMENTO ENTRE SISTEMAS DE INFORMAÇAO E O NEGOCIO - 1ªED.(2011)", "Karoll Haussler Carneiro Ramos", "LTC", "9788521617723", StatusLivro.DISPONIVEL);
+		Livro L15 = new Livro(null, 3, "INTRODUÇAO A ENGENHARIA CIVIL - 1ªED.(2016)", "Edward S. Neumann ", "Gen", "9788535271836", StatusLivro.DISPONIVEL);
 		
 		cat1.getLivros().addAll(Arrays.asList(L1,L2,L5,L6,L8));
 		cat2.getLivros().addAll(Arrays.asList(L3,L4,L7));
@@ -107,12 +108,13 @@ public class DBservice {
 		livroRepository.saveAll(Arrays.asList(L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11,L12,L13,L14,L15));
 	
 		
-		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com", TipoCliente.ALUNO);
-		Cliente cli2 = new Cliente(null, "Oberdran dos Santos", "111111", "55808114039", "oberdran@gmail.com", TipoCliente.ALUNO);
-		Cliente cli3 = new Cliente(null, "Antonio", "222222", "69151418045", "antonio@gmail.com", TipoCliente.ALUNO);
-		Cliente cli4 = new Cliente(null, "Nassib", "333333", "68677865020", "nassib@gmail.com", TipoCliente.ALUNO);
-		Cliente cli5 = new Cliente(null, "Arthur", "444444", "84367518094", "arthur@gmail.com", TipoCliente.ALUNO);
-	   //ligando o cliente aos telefones dele.
+		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com","*adm12345", TipoCliente.ALUNO);
+		Cliente cli2 = new Cliente(null, "Oberdran dos Santos", "111111", "55808114039", "oberdran@gmail.com","1234", TipoCliente.ALUNO);
+		Cliente cli3 = new Cliente(null, "Antonio", "222222", "69151418045", "antonio@gmail.com","4321", TipoCliente.ALUNO);
+		Cliente cli4 = new Cliente(null, "Nassib", "333333", "68677865020", "nassib@gmail.com","12345", TipoCliente.ALUNO);
+		Cliente cli5 = new Cliente(null, "Arthur", "444444", "84367518094", "arthur@gmail.com","2222222", TipoCliente.ALUNO);
+	   
+		//ligando o cliente aos telefones dele.
 		cli1.getTelefones().addAll(Arrays.asList("98984967055","98988665858"));
 	    Endereco e1 = new Endereco(null, "Rua n", "9", "Quadra 10", "Planalto Anil III", "65050883", cli1);
 	
@@ -122,8 +124,9 @@ public class DBservice {
 	    enderecoRepository.saveAll(Arrays.asList(e1));
 	    
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm" );
+	    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy" );
 	    
-	    Emprestimo emp1 = new Emprestimo(null, sdf.parse("10/04/2020 12:30"), cli1, e1);
+	    Emprestimo emp1 = new Emprestimo(null, sdf.parse("10/04/2020 12:30") ,cli1, e1, sdf1.parse("15/04/2020"));
 	 
 	    cli1.getEmprestimos().addAll(Arrays.asList(emp1));
 	     

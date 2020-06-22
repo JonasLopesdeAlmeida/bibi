@@ -22,9 +22,9 @@ public class ItemEmprestimo implements Serializable  {
 	//anotacao usada para dizer que esse id esta embutido em uma classe auxiliar.
 	private ItemEmprestimoPK id = new ItemEmprestimoPK();
 	
-	private Double valor_multa = 0.0;
+	private Double valor_multa ;
 	private Integer quantidade;
-	private Double valor = 0.0;
+	private Double valor = 2.0;
 	
 	public ItemEmprestimo() {
 		
@@ -42,11 +42,11 @@ public class ItemEmprestimo implements Serializable  {
 	}
 	//aqui o valor do metodo sera reconhecido pelo json e serializado.
 	//Obs: esse metodo sera implementado apos confirmar como faz o calculo da multa na biblioteca wyden.
-	public double getSubTotal() {
-		
-		return valor = valor_multa;
-		
-	}
+//	public double getSubTotal() {
+//		
+//		return valor = valor_multa;
+//		
+//	}
 	
 	@JsonIgnore
 	//atribuindo os get`s para Emprestimo e Livro para ter acesso a eles fora da classe ItemEmprestimo.
@@ -126,6 +126,17 @@ public class ItemEmprestimo implements Serializable  {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getLivro().getNome());
+		builder.append(", Qtd: ");
+		builder.append(getQuantidade());
+		builder.append("\n");
+		return builder.toString();
+	}
+	
 	
 	
 
