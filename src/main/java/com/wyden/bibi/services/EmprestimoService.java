@@ -66,7 +66,6 @@ public class EmprestimoService {
             ie.setLivro(livrorservice.find(ie.getLivro().getId_livro()));
 			ie.setEmprestimo(obj);
 		}
-		
         //salvando todos os itens
 		itememprestimorepository.saveAll(obj.getItens());
 		//enviando email de confirmação do emprestimo.
