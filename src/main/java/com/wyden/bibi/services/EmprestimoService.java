@@ -29,8 +29,8 @@ public class EmprestimoService {
 	@Autowired
     private ClienteService  clienterservice;
 	
-//	@Autowired
-//	private EmailService emailservice;
+	@Autowired
+	private EmailService emailservice;
 
 	
 	public Emprestimo find(Integer id) {
@@ -69,7 +69,7 @@ public class EmprestimoService {
         //salvando todos os itens
 		itememprestimorepository.saveAll(obj.getItens());
 		//enviando email de confirmação do emprestimo.
-//		emailservice.sendOrderConfirmationEmail(obj);
+		emailservice.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 
