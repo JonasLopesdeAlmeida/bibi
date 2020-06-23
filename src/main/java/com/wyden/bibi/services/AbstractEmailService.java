@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 import com.wyden.bibi.model.Emprestimo;
 
+
 public abstract class AbstractEmailService implements EmailService {
     @Value("${default.sender}")
 	private String sender; 

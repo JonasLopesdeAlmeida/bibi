@@ -4,6 +4,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 import com.wyden.bibi.model.Emprestimo;
 
+
 public interface EmailService {
 
 	void sendOrderConfirmationEmail(Emprestimo obj);	
