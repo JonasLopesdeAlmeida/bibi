@@ -53,12 +53,12 @@ public class EmprestimoService {
 		obj = repo.save(obj);
 		
 		//gerando multa 
-		double multa = 0.0;
-		do {
-		    multa += 2.0;
-			obj.setValor_multa(multa);		
-		}	
-		while(Calendar.getInstance().after(obj.getDatadeEntrega()));
+//		double multa = 0.0;
+//		do {
+//		    multa += 2.0;
+//			obj.setValor_multa(multa);		
+//		}	
+//		while(Calendar.getInstance().after(obj.getDatadeEntrega()));
 			
 		//adicionando itens 
 		for (ItemEmprestimo ie : obj.getItens()) {
