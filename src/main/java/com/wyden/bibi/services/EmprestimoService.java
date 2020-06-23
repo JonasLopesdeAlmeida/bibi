@@ -28,11 +28,11 @@ public class EmprestimoService {
 	private ItemEmprestimoRepository itememprestimorepository;
 	
 	@Autowired
-    private ClienteService  clienterservice;
+    private ClienteService clienterservice;
 	
 	@Autowired
-	private EmailService emailservice;
-
+    private EmailService emailservice;
+	
 	
 	public Emprestimo find(Integer id) {
 		Optional<Emprestimo> obj = repo.findById(id);
