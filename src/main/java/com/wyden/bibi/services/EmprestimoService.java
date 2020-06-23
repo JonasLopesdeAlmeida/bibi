@@ -17,6 +17,7 @@ import com.wyden.bibi.services.exceptions.ObjectNotFoundException;
 @Service
 public class EmprestimoService {
 	
+	
 	@Autowired
 	private LivroService livrorservice;
 	
