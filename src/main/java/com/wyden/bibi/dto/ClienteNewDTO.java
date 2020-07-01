@@ -40,6 +40,7 @@ public class ClienteNewDTO implements Serializable {
 	
 	private String complemento;
 	
+	@NotEmpty(message="Preenchimento obrigatorio")
 	private String senha;
 	
 	private String bairro;

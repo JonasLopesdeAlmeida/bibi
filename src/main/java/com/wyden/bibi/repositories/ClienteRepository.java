@@ -10,6 +10,7 @@ import com.wyden.bibi.model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     
+	
 	@org.springframework.transaction.annotation.Transactional(readOnly = true)
 	Cliente findByEmail(String email);
 	
@@ -23,6 +24,9 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	
 	@org.springframework.transaction.annotation.Transactional(readOnly = true)
     Optional<Cliente>findByMatricula(String matricula);
+	
+//	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+//	Cliente findByMatricula(String matricula);
 	
 //	@org.springframework.transaction.annotation.Transactional(readOnly = true)
 //    Optional<Cliente>findBySenha(String senha);

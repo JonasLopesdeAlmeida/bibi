@@ -5,18 +5,22 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wyden.bibi.model.enums.Perfil;
 import com.wyden.bibi.model.enums.TipoCliente;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +31,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Cliente  implements Serializable  {
 	private static final long serialVersionUID = 1L;
@@ -46,7 +49,7 @@ public class Cliente  implements Serializable  {
 	
 	@Column(unique=true)
 	private String email;
-	
+	@JsonIgnore //para não aparecer a senha no json
 	private String senha;
 	
 	//internamente o TipoCliente sera armazenado como numero inteiro.
@@ -69,12 +72,20 @@ public class Cliente  implements Serializable  {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
     
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	//O cliente tem uma lista de emprestimos.
 	private List<Emprestimo> emprestimos = new ArrayList<>();
 
+	
+	public Cliente() {
+		//por padrao todos os usuarios adicionados terao o perfil de cliente como padrao.
+		addPerfil(Perfil.CLIENTE);
+	}
 	
 
    //Obs: colecoes nao entram no construtor: Endereco e Telefone.
@@ -89,6 +100,7 @@ public class Cliente  implements Serializable  {
 		//para pegar somente o codigo.
 		//fazendo uma condicional caso ret
 		this.tipo = (tipo==null) ? null : tipo.getCod();
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId_cliente() {
@@ -139,7 +151,18 @@ public class Cliente  implements Serializable  {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	//metodo para converter o numero inteiro para perfil.
+	public Set<Perfil> getPerfis(){
+		//esta linha e responsavel por retornar o perfis.
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
 
+	//metodo para dicionar um perfil
+	public void addPerfil(Perfil perfil) {
+		
+		perfis.add(perfil.getCod());
+	}
 
 	public TipoCliente getTipo() {
 		return TipoCliente.toEnum(tipo);

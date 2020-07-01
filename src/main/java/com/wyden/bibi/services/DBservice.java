@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wyden.bibi.model.Categoria;
@@ -13,6 +14,7 @@ import com.wyden.bibi.model.Emprestimo;
 import com.wyden.bibi.model.Endereco;
 import com.wyden.bibi.model.ItemEmprestimo;
 import com.wyden.bibi.model.Livro;
+import com.wyden.bibi.model.enums.Perfil;
 import com.wyden.bibi.model.enums.StatusLivro;
 import com.wyden.bibi.model.enums.TipoCliente;
 import com.wyden.bibi.repositories.CategoriaRepository;
@@ -24,6 +26,9 @@ import com.wyden.bibi.repositories.LivroRepository;
 
 @Service
 public class DBservice {
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -108,11 +113,15 @@ public class DBservice {
 		livroRepository.saveAll(Arrays.asList(L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11,L12,L13,L14,L15));
 	
 		
-		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com","*adm12345", TipoCliente.ALUNO);
-		Cliente cli2 = new Cliente(null, "Oberdran dos Santos", "111111", "55808114039", "oberdran@gmail.com","1234", TipoCliente.ALUNO);
-		Cliente cli3 = new Cliente(null, "Antonio", "222222", "69151418045", "antonio@gmail.com","4321", TipoCliente.ALUNO);
-		Cliente cli4 = new Cliente(null, "Nassib", "333333", "68677865020", "nassib@gmail.com","12345", TipoCliente.ALUNO);
-		Cliente cli5 = new Cliente(null, "Arthur", "444444", "84367518094", "arthur@gmail.com","2222222", TipoCliente.ALUNO);
+		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com",pe.encode("*teste1234"), TipoCliente.ALUNO);
+		//adicionando o perfil de administrado para jonas.
+		cli1.addPerfil(Perfil.ADMIN);
+		
+		Cliente cli2 = new Cliente(null, "Oberdran dos Santos", "111111", "55808114039", "oberdran@gmail.com",pe.encode("12345"), TipoCliente.ALUNO);
+		Cliente cli3 = new Cliente(null, "Antonio", "222222", "69151418045", "antonionarcilio@gmail.com",pe.encode("*admtes123"), TipoCliente.ALUNO);
+		cli3.addPerfil(Perfil.ADMIN);
+		Cliente cli4 = new Cliente(null, "Nassib", "333333", "68677865020", "nassib@gmail.com",pe.encode("!A4567Te"), TipoCliente.ALUNO);
+		Cliente cli5 = new Cliente(null, "Arthur", "444444", "84367518094", "arthur@gmail.com",pe.encode("1234567"), TipoCliente.ALUNO);
 	   
 		//ligando o cliente aos telefones dele.
 		cli1.getTelefones().addAll(Arrays.asList("98984967055","98988665858"));

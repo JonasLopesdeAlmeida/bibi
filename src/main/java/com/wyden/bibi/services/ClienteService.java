@@ -10,20 +10,28 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wyden.bibi.dto.ClienteDTO;
 import com.wyden.bibi.dto.ClienteNewDTO;
 import com.wyden.bibi.model.Cliente;
 import com.wyden.bibi.model.Endereco;
+import com.wyden.bibi.model.enums.Perfil;
 import com.wyden.bibi.model.enums.TipoCliente;
 import com.wyden.bibi.repositories.ClienteRepository;
 import com.wyden.bibi.repositories.EnderecoRepository;
+import com.wyden.bibi.security.UserSpringSecurity;
+import com.wyden.bibi.services.exceptions.AuthorizationException;
 import com.wyden.bibi.services.exceptions.DataIntegrityException;
 import com.wyden.bibi.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	@Autowired
 	private ClienteRepository repo;
 	
@@ -33,6 +41,13 @@ public class ClienteService {
 	
 
 	public Cliente find(Integer id) {
+		
+		UserSpringSecurity user = UserService.authenticated();
+		
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado.");
+		}
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Cliente não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
@@ -105,12 +120,12 @@ public class ClienteService {
 
 	public Cliente fromDTO(ClienteDTO objDTO) {
                
-		return new Cliente(objDTO.getId_cliente(), objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(),objDTO.getSenha(), null);
+		return new Cliente(objDTO.getId_cliente(), objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(),null, null);
 	}
 
 	public Cliente fromDTO(ClienteNewDTO objDTO) {
 	
-		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(), objDTO.getSenha(), TipoCliente.toEnum(objDTO.getTipo()));
+		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getMatricula(), objDTO.getCpf(), objDTO.getEmail(), pe.encode(objDTO.getSenha()), TipoCliente.toEnum(objDTO.getTipo()));
 	    Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), cli);
 	    cli.getEnderecos().add(end);
 	    //somente o telefone1 e obrigatorio.

@@ -26,7 +26,7 @@ public class ClienteDTO implements Serializable {
 	private String matricula;
 	@CPF
 	private String cpf;
-	
+	@NotEmpty(message = "Preenchimento obrigatorio")
     private String senha;
  
 
