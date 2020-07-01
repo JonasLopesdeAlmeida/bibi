@@ -113,7 +113,7 @@ public class DBservice {
 		livroRepository.saveAll(Arrays.asList(L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11,L12,L13,L14,L15));
 	
 		
-		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com",pe.encode("*teste1234"), TipoCliente.ALUNO);
+		Cliente cli1 = new Cliente(null, "Jonas Lopes de Almeida", "181016504", "11093891750", "jmdlopes.almeida@gmail.com",pe.encode("*adm12345"), TipoCliente.ALUNO);
 		//adicionando o perfil de administrado para jonas.
 		cli1.addPerfil(Perfil.ADMIN);
 		

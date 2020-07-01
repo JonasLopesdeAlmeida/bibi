@@ -49,6 +49,7 @@ public class Cliente  implements Serializable  {
 	
 	@Column(unique=true)
 	private String email;
+	
 	@JsonIgnore //para não aparecer a senha no json
 	private String senha;
 	

@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// definido no método acima.
 	protected void configure(HttpSecurity http) throws Exception {
 		// verificando os prifiles ativos do projeto da bibi ex: test, dev e prod.
-		if (Arrays.asList(env.getActiveProfiles()).contains("dev")) {
+		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
 			http.headers().frameOptions().disable();
 		}
 
